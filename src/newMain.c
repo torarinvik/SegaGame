@@ -7,6 +7,7 @@ typedef struct
 {
     int pos_x, pos_y, vel_x, vel_y, width, height;
 } Ball;
+
 enum Wall
 {
     LEFT_EDGE = 0,
