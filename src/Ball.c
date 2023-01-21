@@ -2,7 +2,7 @@
 
 
 
-Ball new_ball(double mass, double radius, char* color, double x, double y, double vx, double vy) {
+Ball new_ball(double mass, double radius, char* color, double x, double y, double vx, double vy, const SpriteDefinition* image) {
     Ball ball;
     ball.mass = mass;
     ball.inv_mass = mass == 0 ? 0 : 1 / mass;
@@ -15,8 +15,9 @@ Ball new_ball(double mass, double radius, char* color, double x, double y, doubl
     ball.acc_mult = 1;
     ball.elasticity = 0.8;
     ball.color = color;
-    if (balls_count < MAX_BALLS) {
-        balls[balls_count++] = ball;
+    ball.sprite = SPR_addSprite(image,x,y,TILE_ATTR(PAL1,0, FALSE, FALSE));
+    if (shared_data.balls_count < MAX_BALLS) {
+        balls[shared_data.balls_count++] = ball;
     }
     return ball;
 }
@@ -29,6 +30,7 @@ void reposition_ball(Ball* ball) {
     add(ball->vel, ball->acc);
     scale(ball->vel, 1 - friction);
     add(ball->pos, ball->vel);
+    SPR_setPosition(ball->sprite,ball->pos.x,ball->pos.y);
 }
 
 void reset_ball(Ball* ball) {
