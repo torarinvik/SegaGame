@@ -7,14 +7,15 @@
 #include "Basic.h"
 
 
-
-
 Bool detect_collision_between_balls(Ball* ball1, Ball* ball2);
 void prevent_overlap_between_balls(Ball* ball1, Ball* ball2);
-
 void resolve_collision_between_balls(Ball* ball1, Ball* ball2);
 
 Vector closest_point_on_wall(Ball* ball, Wall* wall);
+
 Bool detect_collision_between_ball_and_wall(Ball* ball, Wall* wall);
+void resolve_penetration_between_ball_and_wall(Ball* ball, Wall* wall); 
+void resolve_collision_between_ball_and_wall(Ball* ball, Wall* wall);
+
 
 #endif
