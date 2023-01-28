@@ -17,13 +17,13 @@ typedef struct Ball {
     char* color;
     Sprite* sprite;
 } Ball;
-#define MAX_BALLS 10
+#define MAX_BALLS 2
 
 Ball new_ball(double mass, double radius, char* color, double x, double y, double vx, double vy,const SpriteDefinition* image);
 void reposition_ball(Ball* ball);
 void reset_ball(Ball* ball);
 
 Ball balls[MAX_BALLS];
-
+void draw_ball(Ball* ball);
 
 #endif

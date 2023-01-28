@@ -26,14 +26,20 @@ Ball new_ball(double mass, double radius, char* color, double x, double y, doubl
 
 void reposition_ball(Ball* ball) {
     ball->acc = normal(ball->acc);
-    scale(ball->acc, ball->acc_mult);
-    add(ball->vel, ball->acc);
-    scale(ball->vel, 1 - friction);
-    add(ball->pos, ball->vel);
+    //scale(ball->acc, ball->acc_mult);
+    ball->vel = add(ball->vel, ball->acc);
+    //scale(ball->vel, 1 - friction);
+    ball->pos = add(ball->pos, ball->vel);
     SPR_setPosition(ball->sprite,ball->pos.x,ball->pos.y);
 }
 
 void reset_ball(Ball* ball) {
     ball->pos = ball->originalpos;
     ball->vel = ball->originalvel;
+}
+
+
+void draw_ball(Ball* ball) {
+    //VDP_drawCircle(ball->pos.x, ball->pos.y, ball->r, ball->color);
+    SPR_setPosition(ball->sprite,ball->pos.x,ball->pos.y);
 }
