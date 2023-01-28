@@ -193,8 +193,8 @@ while active:
 
     window.fill('black')
 
-    for ind, bol in enumerate(balls):
-        bol.draw()
+    for ind, ball_ in enumerate(balls):
+        ball_.draw()
 
         # walls
         for i in range(len(walls)):
@@ -207,7 +207,7 @@ while active:
             if coll_det_bb(balls[ind], balls[i]):
                 pen_res_bb(balls[ind], balls[i])
                 coll_res_bb(balls[ind], balls[i])
-        bol.reposition()
+        ball_.reposition()
 
     pygame.display.update()
     clock.tick(60)

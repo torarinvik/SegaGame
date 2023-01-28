@@ -6,6 +6,7 @@
 #include <genesis.h>
 #include <resources.h>
 #include "Ball.h"
+#include "Wall.h"
 
 /*The edges of the play field*/
 const int LEFT_EDGE = 0;
@@ -14,8 +15,8 @@ const int TOP_EDGE = 0;
 const int BOTTOM_EDGE = 224;
 
 Sprite* ball;
-Ball* ballFromStruct;
-Ball* ballFromStruct2;
+//Ball* ballFromStruct;
+//Ball* ballFromStruct2;
 
 int ball_pos_x = 150;
 int ball_pos_y = 100;
@@ -24,32 +25,31 @@ int ball_vel_y = 1;
 int ball_width = 8;
 int ball_height = 8;
 
-void moveBall(){
 
-	//Check horizontal bounds
-	if(ball_pos_x < LEFT_EDGE){
-		ball_pos_x = LEFT_EDGE;
-		ball_vel_x = -ball_vel_x;
-	} else if(ball_pos_x + ball_width > RIGHT_EDGE){
-		ball_pos_x = RIGHT_EDGE - ball_width;
-		ball_vel_x = -ball_vel_x;
-	}
 
-	//Check vertical bounds
-	if(ball_pos_y < TOP_EDGE){
-		ball_pos_y = TOP_EDGE;
-		ball_vel_y = -ball_vel_y;
-	} else if(ball_pos_y + ball_height > BOTTOM_EDGE){
-		ball_pos_y = BOTTOM_EDGE - ball_height;
-		ball_vel_y = -ball_vel_y;
-	}
+// void handle_ball_wall_collision(Ball* ball, Wall* walls, int num_walls) {
+//     for (int i = 0; i < num_walls; i++) {
+//         if (coll_det_bw(ball, &walls[i])) {
+//             pen_res_bw(ball, &walls[i]);
+//             coll_res_bw(ball, &walls[i]);
+//         }
+//     }
+// }
 
-	//Position the ball
-	ball_pos_x += ball_vel_x;
-	ball_pos_y += ball_vel_y;
+// void handle_ball_ball_collision(Ball* ball, Ball* balls, int num_balls) {
+//     for (int i = 0; i < num_balls; i++) {
+//         if (coll_det_bb(ball, &balls[i])) {
+//             pen_res_bb(ball, &balls[i]);
+//             coll_res_bb(ball, &balls[i]);
+//         }
+//     }
+// }
 
-	SPR_setPosition(ball,ball_pos_x,ball_pos_y);
-}
+
+
+
+
+
 // void moveBallKeypad()
 // {
 // 	if (JOY_readJoypad(JOY_1) & BUTTON_LEFT)
@@ -94,7 +94,16 @@ void moveBall(){
 // 	moveBallKeypad();
 // }
 
+// void gameLoop()
+// {
+// 	 for (int ind = 0; ind < MAX_BALLS; ind++) {
+//         drawBall(&balls[ind]);
 
+//         handle_ball_wall_collision(&balls[ind], walls, MAX_WALLS);
+//         handle_ball_ball_collision(&balls[ind], balls, MAX_BALLS);
+//         repositionBall(&balls[ind]);
+//     }
+// }
 
 
 int main()
@@ -116,8 +125,8 @@ int main()
 
     SPR_init();
     //ball = SPR_addSprite(&imgball,100,100,TILE_ATTR(PAL1,0, FALSE, FALSE));
-	*ballFromStruct = new_ball(1, 1, "red", 25, 25, 1, 1, &imgball);
-	*ballFromStruct2 = new_ball(1, 1, "red", 1, 1, 1, 1, &imgball);
+	Ball ballFromStruct  = new_ball(1, 1, "red", 25, 25, 1, 1, &imgball);
+	Ball ballFromStruct2 = new_ball(1, 1, "red", 1, 1, 1, 1, &imgball);
 
 	//Make ball sprite twice as large
 	
@@ -125,10 +134,19 @@ int main()
 
     while(1)
     {   
-        //moveBall();
+        //gameLoop();
+		//moveBall();
         SPR_update();
         //For versions prior to SGDK 1.60 use VDP_waitVSync instead.
         SYS_doVBlankProcess();
     }   
     return (0);
+
+
 }
+
+
+
+
+
+
