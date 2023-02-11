@@ -1,13 +1,6 @@
 #include "Vector.h"
 
 
-/* double fabs(double x) {
-    return x < 0 ? -x : x;
-} */
-
-
-
-
 
 
 Vector add(Vector self, Vector vec) {
@@ -24,9 +17,11 @@ Vector subtr(Vector self, Vector vec) {
     return result;
 }
 
+
 double mag(Vector self) {
     return sqrt2(self.x * self.x + self.y * self.y);
 }
+
 
 Vector mult(Vector self, double n) {
     Vector result;
@@ -55,11 +50,13 @@ Vector unit(Vector self) {
     return result;
 }
 
+
+
 double dot(Vector vec1, Vector vec2) {
     return vec1.x * vec2.x + vec1.y * vec2.y;
 }
 
-Vector new_vector(double x, double y) {
+Vector newVector(double x, double y) {
     Vector v;
     v.x = x;
     v.y = y;

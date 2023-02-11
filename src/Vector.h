@@ -21,6 +21,6 @@ Vector unit(Vector self);
 
 double dot(Vector vec1, Vector vec2);
 
-Vector new_vector(double x, double y);
+Vector newVector(double x, double y);
 
 #endif

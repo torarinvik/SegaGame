@@ -1,29 +1,23 @@
 #ifndef BALL_H
 #define BALL_H
+
 #include "Vector.h"
-#include "Globals.h"
-#include "genesis.h"
+#include <genesis.h>
 typedef struct Ball {
-    double mass;
-    double inv_mass;
-    double r;
     Vector pos;
-    Vector originalpos;
     Vector vel;
-    Vector originalvel;
-    Vector acc;
-    double acc_mult;
-    double elasticity;
-    char* color;
+    double radius;
     Sprite* sprite;
 } Ball;
-#define MAX_BALLS 2
 
-Ball new_ball(double mass, double radius, char* color, double x, double y, double vx, double vy,const SpriteDefinition* image);
-void reposition_ball(Ball* ball);
-void reset_ball(Ball* ball);
+Ball newBall(Vector pos, Vector vel, double radius, const SpriteDefinition* image);
 
-Ball balls[MAX_BALLS];
-void draw_ball(Ball* ball);
+void updateBall(Ball *ball, double dt);
 
-#endif
+Bool checkBallCollision(Ball *ball1, Ball *ball2);
+void handleBallCollision(Ball *ball1, Ball *ball2);
+
+Bool checkAndHandleWallCollision(Ball *ball, double width, double height);
+
+
+#endif /* BALL_H */
