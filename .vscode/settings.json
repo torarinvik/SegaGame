@@ -5,6 +5,7 @@
     "inc"
 ],
 "files.associations": {
-    "basic.h": "c"
+    "basic.h": "c",
+    "ball.h": "c"
 }
 }

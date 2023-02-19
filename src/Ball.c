@@ -2,8 +2,8 @@
 
 
 
-Ball newBall(Vector pos, Vector vel, double radius, const SpriteDefinition* image) {
-    Ball ball = {pos, vel, radius};
+Ball newBall(Vector pos, Vector vel, double radius, double elasticity, const SpriteDefinition* image) {
+    Ball ball = {pos, vel, radius, elasticity};
     ball.sprite = SPR_addSprite(image,ball.pos.x, ball.pos.y,TILE_ATTR(PAL1,0, FALSE, FALSE));
     return ball;
 }
@@ -58,8 +58,13 @@ void handleBallCollision(Ball *ball1, Ball *ball2) {
     Vector normal_ = normal(delta);
     // Get the unit normal vector
     Vector unit_normal = unit(normal_);
+    
+    
     // Get the unit tangent vector
-    Vector unit_tangent = newVector(-unit_normal.y, unit_normal.x);
+    //Vector unit_tangent = newVector(-unit_normal.y, unit_normal.x);
+
+
+    Vector unit_tangent = unit_normal;
 
     // Calculate the dot product of each ball's velocity with the unit normal and unit tangent vectors
     double v1_n = dot(ball1->vel, unit_normal);
@@ -75,3 +80,19 @@ void handleBallCollision(Ball *ball1, Ball *ball2) {
     ball1->vel = add(mult(unit_tangent, v1_t), mult(unit_normal, u1_n));
     ball2->vel = add(mult(unit_tangent, v2_t), mult(unit_normal, u2_n));
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

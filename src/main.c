@@ -6,7 +6,8 @@
 #include <genesis.h>
 #include <resources.h>
 #include "Ball.h"
-//#include "Collision.h"
+#include "Collision.h"
+#include "Vector.h"
 
 
 // void moveBallKeypad()
@@ -73,21 +74,34 @@ int main()
    //VDP_drawImageEx(BG_B, &bgtile, TILE_ATTR_FULL(PAL1,0,FALSE,FALSE,1),2,2, FALSE, TRUE);
 
    SPR_init();
-   Ball ball = newBall((Vector){0, 0}, (Vector){1, 1}, 4, &imgball);
-   //ball = SPR_addSprite(&imgball,100,100,TILE_ATTR(PAL1,0, FALSE, FALSE));
+   Ball ball =  newBall((Vector){10, 20},   (Vector){0, 0}, 0.5, 1, &imgball);
+   //Ball ball2 = newBall((Vector){80, 20},   (Vector){1, 0}, 0.5,  1, &imgball);
+   
 	
    
-
-   //balls[0] = new_ball(1, 1, "red", 0, 0, 0, 0, &imgball);
-   //balls[1] = new_ball(1, 1, "red", 3, 3, 1, 1, &imgball);
 
    //SYS_die("Game Over");
    const double dt = 2.0;
 
    while(1)
    {   
-      updateBall(&ball, dt);
+      // if (checkBallCollision(&ball, &ball2)){
+      //    handleBallCollision(&ball, &ball2);
+      // }
+      // if (bingIs_colliding(&ball, &ball2)){
+      //   bingHandle_collision(&ball, &ball2);
+      //} 
+
+      //for ball nr 1
       checkAndHandleWallCollision(&ball, 320, 233);
+      //for ball nr 2
+      //checkAndHandleWallCollision(&ball2, 320, 233);
+
+      updateBall(&ball, dt);
+      //updateBall(&ball2, dt);
+      Vector tiss = newVector(0.1, 0.1);
+      ball.vel = add(ball.vel, (Vector)newVector(0.01, 0.005));
+      
        SPR_update();
        //For versions prior to SGDK 1.60 use VDP_waitVSync instead.
        SYS_doVBlankProcess();
